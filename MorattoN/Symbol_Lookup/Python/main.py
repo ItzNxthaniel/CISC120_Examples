@@ -3,11 +3,7 @@
 from symbols import symbols
 
 def is_valid_string(user_input: str) -> bool:
-    try:
-        _ = int(user_input)
-        return False
-    except:
-        return True
+    return not user_input.isnumeric()
 
 def print_symbol(found_symbol: list[str]):
     print(f"  Symbol: {found_symbol[0]}")
