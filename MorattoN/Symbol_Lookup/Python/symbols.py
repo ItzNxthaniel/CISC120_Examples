@@ -1,130 +1,34 @@
-symbols = {
-    "`": {
-        "givenName": "Backtick",
-        "aliasNames": [ "Backquote", "Grave Accent" ]
-    },
-    "~": {
-        "givenName": "Tidle",
-        "aliasNames": []
-    },
-    "!": {
-        "givenName": "Exclamation Mark",
-        "aliasNames": [ "Exclamation Point" ]
-    },
-    "@": {
-        "givenName": "At Symbol",
-        "aliasNames": [ "At Sign", "At" ]
-    },
-    "#": {
-        "givenName": "Pound",
-        "aliasNames": [ "Number", "Hashtag" ]
-    },
-    "$": {
-        "givenName": "Dollar",
-        "aliasNames": []
-    },
-    "%": {
-        "givenName": "Percent",
-        "aliasNames": [ "Mod\\Modulo" ]
-    },
-    "^": {
-        "givenName": "Caret",
-        "aliasNames": [ "Hat", "Exponent" ]
-    },
-    "&": {
-        "givenName": "Ampersand",
-        "aliasNames": [ "And" ]
-    },
-    "*": {
-        "givenName": "Asterisk",
-        "aliasNames": [ "Star" ]
-    },
-    "(": {
-        "givenName": "Open Parenthesis",
-        "aliasNames": [ "Left Parenthesis" ]
-    },
-    ")": {
-        "givenName": "Close Parenthesis",
-        "aliasNames": [ "Right Parenthesis" ]
-    },
-    "-": {
-        "givenName": "Hyphen",
-        "aliasNames": [ "Dash", "Minus/Subtract" ]
-    },
-    "_": {
-        "givenName": "Underscore",
-        "aliasNames": [ "Understrike" ]
-    },
-    "=": {
-        "givenName": "Equals",
-        "aliasNames": []
-    },
-    "+": {
-        "givenName": "Plus",
-        "aliasNames": [ "Addition" ]
-    },
-    "[": {
-        "givenName": "Open Bracket",
-        "aliasNames": [ "Left Barcket" ]
-    },
-    "]": {
-        "givenName": "Close Bracket",
-        "aliasNames": [ "Right Bracket" ]
-    },
-    "{": {
-        "givenName": "Open Curly Bracket",
-        "aliasNames": [ "Left Curly Bracket" ]
-    },
-    "}": {
-        "givenName": "Close Curly Bracket",
-        "aliasNames": [ "Right Curly Bracket" ]
-    },
-    "|": {
-        "givenName": "Vertical Bar",
-        "aliasNames": [ "Pipe", "Vertical Line", "Broken Bar" ]
-    },
-    "\\": {
-        "givenName": "Backslash",
-        "aliasNames": []
-    },
-    ";": {
-        "givenName": "Semicolon",
-        "aliasNames": []
-    },
-    ":": {
-        "givenName": "Colon",
-        "aliasNames": []
-    },
-    "'": {
-        "givenName": "Single Quote",
-        "aliasNames": []
-    },
-    "\"": {
-        "givenName": "Double Quote",
-        "aliasNames": []
-    },
-    ",": {
-        "givenName": "Comma",
-        "aliasNames": []
-    },
-    ".": {
-        "givenName": "Peridot",
-        "aliasNames": [ "Dot" ]
-    },
-    "<": {
-        "givenName": "Open Angle Bracket",
-        "aliasNames": [ "Left Triangle", "Left Angle Bracket", "Less-Than" ]
-    },
-    ">": {
-        "givenName": "Close Angle Bracket",
-        "aliasNames": [ "Right Triangle", "Right Angle Bracket", "More-Than"]
-    },
-    "/": {
-        "givenName": "Forward Slash",
-        "aliasNames": []
-    },
-    "?": {
-        "givenName": "Question Mark",
-        "aliasNames": []
-    }
-}
+symbols: list[list[str]] = [
+    ["`", ["backtick", "backquote", "grave accent"]],
+    ["~", ["tilde"]],
+    ["!", ["exclamation mark", "exclamation point"]],
+    ["@", ["at symbol", "at sign", "at"]],
+    ["#", ["pound", "number", "hashtag"]],
+    ["$", ["dollar"]],
+    ["%", ["percent", "mod\\modulo"]],
+    ["^", ["caret", "hat", "exponent"]],
+    ["&", ["ampersand", "and"]],
+    ["*", ["asterisk", "star"]],
+    ["(", ["open parenthesis", "left parenthesis"]],
+    [")", ["close parenthesis", "right parenthesis"]],
+    ["-", ["hyphen", "dash", "minus/subtract"]],
+    ["_", ["underscore", "understrike"]],
+    ["=", ["equals"]],
+    ["+", ["plus", "addition"]],
+    ["[", ["open bracket", "left bracket"]],
+    ["]", ["close bracket", "right bracket"]],
+    ["{", ["open curly bracket", "left curly bracket"]],
+    ["}", ["close curly bracket", "right curly bracket"]],
+    ["|", ["pipe", "vertical bar", "vertical line", "broken bar"]],
+    ["\\", ["backslash", "reverse slash"]],
+    [";", ["semicolon"]],
+    [":", ["colon"]],
+    ["'", ["apostrophe", "single quote"]],
+    ["\"", ["double quote"]],
+    [",", ["comma"]],
+    [".", ["period", "dot"]],
+    ["<", ["open angle bracket", "less than", "left angle bracket"]],
+    [">", ["close angel bracket", "greater than", "right angle bracket"]],
+    ["/", ["forward slash"]],
+    ["?", ["question mark"]]
+]
