@@ -17,20 +17,20 @@ impl SymbolData {
 impl fmt::Display for SymbolData {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match self.aliases.len() {
-            0 => write!(f, "  Symbol: {}\n  Given Name: {}", self.symbol, self.given_name),
+            0 => write!(f, "  Symbol: {}\n  Given Name: {}", self.symbol, to_titlecase(self.given_name)),
             _ => write!(f, "  Symbol: {}\n  Given Name: {}\n  Aliases: {}",
                         self.symbol,
-                        to_uppercase(self.given_name),
+                        to_titlecase(self.given_name),
                         self.aliases
                             .iter()
-                            .map(|alias| to_uppercase(alias))
+                            .map(|alias| to_titlecase(alias))
                             .collect::<Vec<String>>()
                             .join(", "))
         }
     }
 }
 
-fn to_uppercase(string: &str) -> String {
+pub fn to_titlecase(string: &str) -> String {
     let words = string.split_whitespace();
     let mut final_string = Vec::new();
     for word in words {
@@ -47,8 +47,8 @@ fn to_uppercase(string: &str) -> String {
 
 pub fn get_symbols() -> Vec<SymbolData> {
     Vec::from([
-        SymbolData::new('`',  "tilde",               Vec::new()),
-        SymbolData::new('~',  "backtick",            Vec::from(["backquote", "grave accent"])),
+        SymbolData::new('`',  "backtick",            Vec::from(["backquote", "grave accent"])),
+        SymbolData::new('~',  "tilde",               Vec::new()),
         SymbolData::new('!',  "exclamation mark",    Vec::from(["exclamation point"])),
         SymbolData::new('@',  "at symbol",           Vec::from(["at sign", "at"])),
         SymbolData::new('#',  "pound",               Vec::from(["number", "hashtag"])),
