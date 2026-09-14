@@ -5,27 +5,47 @@ use std::fmt::Formatter;
 pub struct SymbolData {
     pub symbol: char,
     pub given_name: &'static str,
-    pub aliases: Vec<&'static str>,
+    pub aliases: [&'static str; 4],
+    pub alias_count: i8,
 }
 
 impl SymbolData {
-    pub fn new(symbol: char, given_name: &'static str, aliases: Vec<&'static str>) -> Self {
-        Self { symbol, given_name, aliases }
+    pub fn new(
+        symbol: char,
+        given_name: &'static str,
+        aliases: [&'static str; 4],
+        alias_count: i8,
+    ) -> Self {
+        Self {
+            symbol,
+            given_name,
+            aliases,
+            alias_count,
+        }
     }
 }
 
 impl fmt::Display for SymbolData {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        match self.aliases.len() {
-            0 => write!(f, "  Symbol: {}\n  Given Name: {}", self.symbol, to_titlecase(self.given_name)),
-            _ => write!(f, "  Symbol: {}\n  Given Name: {}\n  Aliases: {}",
-                        self.symbol,
-                        to_titlecase(self.given_name),
-                        self.aliases
-                            .iter()
-                            .map(|alias| to_titlecase(alias))
-                            .collect::<Vec<String>>()
-                            .join(", "))
+        match self.alias_count {
+            0 => write!(
+                f,
+                "  Symbol: {}\n  Given Name: {}",
+                self.symbol,
+                to_titlecase(self.given_name)
+            ),
+            _ => write!(
+                f,
+                "  Symbol: {}\n  Given Name: {}\n  Aliases: {}",
+                self.symbol,
+                to_titlecase(self.given_name),
+                self.aliases
+                    .iter()
+                    .map(|alias| to_titlecase(alias))
+                    .filter(|alias| !alias.is_empty())
+                    .collect::<Vec<String>>()
+                    .join(", ")
+            ),
         }
     }
 }
@@ -36,7 +56,7 @@ pub fn to_titlecase(string: &str) -> String {
     for word in words {
         let final_word = match word.get(0..1) {
             Some(first_char) => first_char.to_uppercase().to_string() + &word[1..],
-            None => String::from(word)
+            None => String::from(word),
         };
 
         final_string.push(final_word);
@@ -45,39 +65,39 @@ pub fn to_titlecase(string: &str) -> String {
     final_string.join(" ")
 }
 
-pub fn get_symbols() -> Vec<SymbolData> {
-    Vec::from([
-        SymbolData::new('`',  "backtick",            Vec::from(["backquote", "grave accent"])),
-        SymbolData::new('~',  "tilde",               Vec::new()),
-        SymbolData::new('!',  "exclamation mark",    Vec::from(["exclamation point"])),
-        SymbolData::new('@',  "at symbol",           Vec::from(["at sign", "at"])),
-        SymbolData::new('#',  "pound",               Vec::from(["number", "hashtag"])),
-        SymbolData::new('$',  "dollar",              Vec::new()),
-        SymbolData::new('%',  "percent",             Vec::from(["mod\\modulo"])),
-        SymbolData::new('^',  "caret",               Vec::from(["hat", "exponent"])),
-        SymbolData::new('&',  "ampersand",           Vec::from(["and"])),
-        SymbolData::new('*',  "asterisk",            Vec::from(["star"])),
-        SymbolData::new('(',  "open parenthesis",    Vec::from(["left parenthesis"])),
-        SymbolData::new(')',  "close parenthesis",   Vec::from(["right parenthesis"])),
-        SymbolData::new('-',  "hyphen",              Vec::from(["dash", "minus/subtract"])),
-        SymbolData::new('_',  "underscore",          Vec::from(["understrike"])),
-        SymbolData::new('=',  "equals",              Vec::new()),
-        SymbolData::new('+',  "plus",                Vec::from(["addition"])),
-        SymbolData::new('[',  "open bracket",        Vec::from(["left bracket"])),
-        SymbolData::new(']',  "close bracket",       Vec::from(["right bracket"])),
-        SymbolData::new('{',  "open curly bracket",  Vec::from(["left curly bracket"])),
-        SymbolData::new('}',  "close curly bracket", Vec::from(["right curly bracket"])),
-        SymbolData::new('|',  "pipe",                Vec::from(["vertical bar", "vertical line", "broken bar"])),
-        SymbolData::new('\\', "backslash",           Vec::from(["reverse slash"])),
-        SymbolData::new(';',  "semicolon",           Vec::new()),
-        SymbolData::new(':',  "colon",               Vec::new()),
-        SymbolData::new('\'', "apostrophe",          Vec::from(["single quote"])),
-        SymbolData::new('"',  "double quote",        Vec::new()),
-        SymbolData::new(',',  "comma",               Vec::new()),
-        SymbolData::new('.',  "period",              Vec::from(["dot"])),
-        SymbolData::new('<',  "open angle bracket",  Vec::from(["less than", "left angle bracket"])),
-        SymbolData::new('>',  "close angel bracket", Vec::from(["greater than", "right angle bracket"])),
-        SymbolData::new('/',  "forward slash",       Vec::new()),
-        SymbolData::new('?',  "question mark",       Vec::new()),
-    ])
+pub fn get_symbols() -> [SymbolData; 32] {
+    [
+        SymbolData::new('`', "backtick", ["backquote", "grave accent", "", ""], 2),
+        SymbolData::new('~', "tilde", ["", "", "", ""], 0),
+        SymbolData::new( '!', "exclamation mark", ["exclamation point", "bang", "", ""], 2,),
+        SymbolData::new('@', "at symbol", ["at sign", "at", "", ""], 2),
+        SymbolData::new('#', "pound", ["number", "hashtag", "sh", ""], 3),
+        SymbolData::new('$', "dollar", ["", "", "", ""], 0),
+        SymbolData::new('%', "percent", ["mod", "modulo", "", ""], 2),
+        SymbolData::new('^', "caret", ["hat", "exponent", "", ""], 2),
+        SymbolData::new('&', "ampersand", ["and", "", "", ""], 1),
+        SymbolData::new('*', "asterisk", ["star", "", "", ""], 1),
+        SymbolData::new('(', "open parenthesis", ["left parenthesis", "", "", ""], 1),
+        SymbolData::new( ')', "close parenthesis", ["right parenthesis", "", "", ""], 1,),
+        SymbolData::new('-', "hyphen", ["dash", "minus", "subtract", ""], 3),
+        SymbolData::new('_', "underscore", ["understrike", "", "", ""], 1),
+        SymbolData::new('=', "equals", ["", "", "", ""], 0),
+        SymbolData::new('+', "plus", ["addition", "", "", ""], 1),
+        SymbolData::new('[', "open bracket", ["left bracket", "", "", ""], 1),
+        SymbolData::new(']', "close bracket", ["right bracket", "", "", ""], 1),
+        SymbolData::new( '{', "open curly bracket", ["left curly bracket", "", "", ""], 1,),
+        SymbolData::new( '}', "close curly bracket", ["right curly bracket", "", "", ""], 1,),
+        SymbolData::new( '|', "pipe", ["vertical bar", "vertical line", "broken bar", ""], 3,),
+        SymbolData::new('\\', "backslash", ["reverse slash", "", "", ""], 1),
+        SymbolData::new(';', "semicolon", ["", "", "", ""], 0),
+        SymbolData::new(':', "colon", ["", "", "", ""], 0),
+        SymbolData::new('\'', "apostrophe", ["single quote", "", "", ""], 1),
+        SymbolData::new('"', "double quote", ["", "", "", ""], 0),
+        SymbolData::new(',', "comma", ["", "", "", ""], 0),
+        SymbolData::new('.', "period", ["dot", "", "", ""], 1),
+        SymbolData::new( '<', "open angle bracket", ["less than", "left angle bracket", "", ""], 2,),
+        SymbolData::new( '>', "close angel bracket", ["greater than", "right angle bracket", "", ""], 2,),
+        SymbolData::new('/', "forward slash", ["", "", "", ""], 0),
+        SymbolData::new('?', "question mark", ["", "", "", ""], 0),
+    ]
 }
