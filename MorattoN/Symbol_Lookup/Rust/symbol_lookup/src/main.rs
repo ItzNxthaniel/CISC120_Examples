@@ -25,7 +25,7 @@ fn find_symbol_by_name(symbols: &[SymbolData], lookup_name: &str) -> Option<Symb
 fn main() {
     let mut new_run: bool = true;
 
-    let symbols: Vec<SymbolData> = symbols::get_symbols();
+    let symbols: [SymbolData; 32] = symbols::get_symbols();
     loop {
         let mut user_input = String::new();
 
