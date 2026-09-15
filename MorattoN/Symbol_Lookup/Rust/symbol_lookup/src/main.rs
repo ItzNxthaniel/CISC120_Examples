@@ -13,13 +13,11 @@ fn find_symbol(symbols: &[SymbolData], lookup_symbol: char) -> Option<SymbolData
 }
 
 fn find_symbol_by_name(symbols: &[SymbolData], lookup_name: &str) -> Option<SymbolData> {
-    symbols.iter().find_map(|symbol_data| {
-        if symbol_data.given_name == lookup_name || symbol_data.aliases.contains(&lookup_name) {
-            Some(symbol_data.clone())
-        } else {
-            None
-        }
-    })
+    symbols
+        .iter()
+        .find(|symbol_data| symbol_data.given_name == lookup_name
+            || symbol_data.aliases.contains(&lookup_name))
+        .cloned()
 }
 
 fn main() {
