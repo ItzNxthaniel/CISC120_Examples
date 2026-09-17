@@ -1,6 +1,7 @@
 use std::fmt::{self, Display, Formatter};
 use std::io::{self, Write};
 
+#[derive(Eq, PartialEq)]
 enum Operation {
     And,
     Or,
@@ -41,7 +42,7 @@ fn get_valid_operation() -> io::Result<Operation> {
 
     loop {
         let mut raw_value = String::new();
-        print!("Enter one of [and, &, or, |, xor, ^, lshift, <<, rshift, >>]: ");
+        print!("Enter one of [and, &, or, |, xor, ^, lshift, <<, rshift, >>, not, !]: ");
         io::stdout().flush()?;
         io::stdin().read_line(&mut raw_value)?;
         match raw_value.to_lowercase().trim() {
@@ -74,12 +75,25 @@ fn do_operation(value1: i8, value2: i8, operation: Operation) {
     println!("{value1} {operation} {value2}: \t\t{result:08b}\t\t{result}");
 }
 
+fn do_operation_not(value: i8) {
+    let result: i8 = !value;
+
+    println!("***********************************");
+    println!("{value} in binary:\t\t{value:08b}");
+    println!("Not {value}: \t\t{result:08b}\t\t{result}");
+}
+
 fn main() -> io::Result<()> {
     loop {
-        let value1 = get_valid_isize(1)?;
-        let value2 = get_valid_isize(2)?;
         let operation = get_valid_operation()?;
+        let value1 = get_valid_isize(1)?;
 
-        do_operation(value1, value2, operation);
+        if operation != Operation::Not {
+            let value2 = get_valid_isize(2)?;
+            do_operation(value1, value2, operation);
+            continue;
+        }
+
+        do_operation_not(value1);
     }
 }
