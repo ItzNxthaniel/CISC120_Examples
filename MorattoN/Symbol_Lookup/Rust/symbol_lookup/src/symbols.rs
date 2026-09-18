@@ -1,5 +1,4 @@
-use std::fmt;
-use std::fmt::Formatter;
+use std::fmt::{self, Formatter};
 
 #[derive(Clone)]
 pub struct SymbolData {
@@ -69,7 +68,12 @@ pub fn get_symbols() -> [SymbolData; 32] {
     [
         SymbolData::new('`', "backtick", ["backquote", "grave accent", "", ""], 2),
         SymbolData::new('~', "tilde", ["", "", "", ""], 0),
-        SymbolData::new('!', "exclamation mark", ["exclamation point", "bang", "", ""], 2,),
+        SymbolData::new(
+            '!',
+            "exclamation mark",
+            ["exclamation point", "bang", "", ""],
+            2,
+        ),
         SymbolData::new('@', "at symbol", ["at sign", "at", "", ""], 2),
         SymbolData::new('#', "pound", ["number", "hashtag", "sh", ""], 3),
         SymbolData::new('$', "dollar", ["", "", "", ""], 0),
@@ -78,26 +82,61 @@ pub fn get_symbols() -> [SymbolData; 32] {
         SymbolData::new('&', "ampersand", ["and", "", "", ""], 1),
         SymbolData::new('*', "asterisk", ["star", "", "", ""], 1),
         SymbolData::new('(', "open parenthesis", ["left parenthesis", "", "", ""], 1),
-        SymbolData::new(')', "close parenthesis", ["right parenthesis", "", "", ""], 1,),
+        SymbolData::new(
+            ')',
+            "close parenthesis",
+            ["right parenthesis", "", "", ""],
+            1,
+        ),
         SymbolData::new('-', "hyphen", ["dash", "minus", "subtract", ""], 3),
         SymbolData::new('_', "underscore", ["understrike", "", "", ""], 1),
         SymbolData::new('=', "equals", ["", "", "", ""], 0),
         SymbolData::new('+', "plus", ["addition", "", "", ""], 1),
         SymbolData::new('[', "open bracket", ["left bracket", "", "", ""], 1),
         SymbolData::new(']', "close bracket", ["right bracket", "", "", ""], 1),
-        SymbolData::new('{', "open curly bracket", ["left curly bracket", "", "", ""], 1,),
-        SymbolData::new('}', "close curly bracket", ["right curly bracket", "", "", ""], 1,),
-        SymbolData::new('|', "pipe", ["vertical bar", "vertical line", "broken bar", ""], 3,),
-        SymbolData::new('\\', "backslash", ["reverse slash", "", "", ""], 1),
+        SymbolData::new(
+            '{',
+            "open curly bracket",
+            ["left curly bracket", "", "", ""],
+            1,
+        ),
+        SymbolData::new(
+            '}',
+            "close curly bracket",
+            ["right curly bracket", "", "", ""],
+            1,
+        ),
+        SymbolData::new(
+            '|',
+            "pipe",
+            ["vertical bar", "vertical line", "broken bar", ""],
+            3,
+        ),
+        SymbolData::new(
+            '\\',
+            "backslash",
+            ["reverse slash", "back slash", "", ""],
+            1,
+        ),
         SymbolData::new(';', "semicolon", ["", "", "", ""], 0),
         SymbolData::new(':', "colon", ["", "", "", ""], 0),
         SymbolData::new('\'', "apostrophe", ["single quote", "", "", ""], 1),
         SymbolData::new('"', "double quote", ["", "", "", ""], 0),
         SymbolData::new(',', "comma", ["", "", "", ""], 0),
         SymbolData::new('.', "period", ["dot", "", "", ""], 1),
-        SymbolData::new('<', "open angle bracket", ["less than", "left angle bracket", "", ""], 2,),
-        SymbolData::new('>', "close angel bracket", ["greater than", "right angle bracket", "", ""], 2,),
-        SymbolData::new('/', "forward slash", ["", "", "", ""], 0),
+        SymbolData::new(
+            '<',
+            "open angle bracket",
+            ["less than", "left angle bracket", "", ""],
+            2,
+        ),
+        SymbolData::new(
+            '>',
+            "close angel bracket",
+            ["greater than", "right angle bracket", "", ""],
+            2,
+        ),
+        SymbolData::new('/', "forward slash", ["slash", "", "", ""], 0),
         SymbolData::new('?', "question mark", ["", "", "", ""], 0),
     ]
 }
